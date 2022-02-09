@@ -14,17 +14,18 @@ export const getRecipes = async () => {
   return recipeList;
 };
 
-const getUsers = async () => {
+export const getUsers = async () => {
   const users = collection(db, "users");
   const usersSnapshot = await getDocs(users);
   console.log(usersSnapshot.docs);
   const usersList = usersSnapshot.docs.map((doc) => doc.data());
   console.log(usersList);
+  return usersList
 };
 
 // create database and fields.  Will create a new db everytime this is ran.
 
-async function createUserData(
+export async function createUserData(
   firstName,
   lastName,
   password,

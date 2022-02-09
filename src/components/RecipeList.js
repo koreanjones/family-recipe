@@ -3,7 +3,7 @@ import Recipe from "./Recipe";
 
 const RecipeList = (recipeList) => {
   const recipes = recipeList.recipeList
-
+  console.log('look here=======>>>>>>', recipeList)
   return (
       <>
       {recipes.map((recipe) => (

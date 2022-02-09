@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -56,16 +57,17 @@ const ExpandMore = styled((props) => {
 // }
 
 const Recipe = (recipe) => {
-  const [expanded, setExpanded] = React.useState(false);
-
+  const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   recipe = recipe.recipe;
   return (
     <>
+      {console.log(recipe.name)}
       <Card sx={{ maxWidth: 345 }}>
-        <CardHeader title={recipe.name} subheader="subheader" />
+        <CardHeader title={recipe.recipeList[0].name} subheader={"by " + recipe.name.first + " " + recipe.name.last} />
         <CardMedia
           component="img"
           height="194"
@@ -74,7 +76,7 @@ const Recipe = (recipe) => {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {recipe.description}
+            {recipe.recipeList[0].description}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -110,7 +112,6 @@ const Recipe = (recipe) => {
           </CardContent>
         </Collapse>
       </Card>
-
     </>
   );
 };
