@@ -1,15 +1,15 @@
 import React from "react";
 import Dialog from "@material-ui/core/Dialog";
-import Form from "./Form";
+import UserForm from "./UserForm";
 
-const ModalDialog = ({ open, handleClose }) => {
+const UserModalDialog = ({ open, handleClose }) => {
     console.log(open, handleClose)
   return (
     // props received from App.js
     <Dialog open={open} onClose={handleClose}>
-      <Form handleClose={handleClose} />
+      <UserForm handleClose={handleClose} />
     </Dialog>
   );
 };
 
-export default ModalDialog;
+export default UserModalDialog;

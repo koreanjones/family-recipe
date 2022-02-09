@@ -67,7 +67,7 @@ const Recipe = (recipe) => {
     <>
       {console.log(recipe.name)}
       <Card sx={{ maxWidth: 345 }}>
-        <CardHeader title={recipe.recipeList[0].name} subheader={"by " + recipe.name.first + " " + recipe.name.last} />
+        <CardHeader title={recipe.recipeList[0].name === 'undefind' ? "notworking" : recipe.recipeList[0].name} subheader={"by " + recipe.name.first + " " + recipe.name.last} />
         <CardMedia
           component="img"
           height="194"

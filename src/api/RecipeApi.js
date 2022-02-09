@@ -3,7 +3,7 @@ import {
   getDocs,
   addDoc,
   doc,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 
@@ -20,27 +20,12 @@ export const getUsers = async () => {
   console.log(usersSnapshot.docs);
   const usersList = usersSnapshot.docs.map((doc) => doc.data());
   console.log(usersList);
-  return usersList
+  return usersList;
 };
 
 // create database and fields.  Will create a new db everytime this is ran.
 
-export async function createUserData(
-  firstName,
-  lastName,
-  password,
-  email,
-//   recipeTitle,
-//   recipeDescription,
-//   ingredientName,
-//   ingredientAmount,
-//   ingredientName2,
-//   ingredientAmount2,
-//   cookingTime,
-//   prepTime,
-//   cookingInstructions,
-//   image
-) {
+export async function createUserData(firstName, lastName, password, email) {
   try {
     const docRef = await addDoc(collection(db, "users"), {
       name: {
@@ -48,51 +33,13 @@ export async function createUserData(
         last: lastName,
       },
       email: email,
-      password: password,
-    //   recipeList: [
-    //     {
-    //       name: recipeTitle,
-    //       description: recipeDescription,
-    //       ingredients: [
-    //         {
-    //           name: ingredientName,
-    //           amount: ingredientAmount,
-    //         },
-    //         {
-    //           name: ingredientName2,
-    //           amount: ingredientAmount2,
-    //         },
-    //       ],
-    //       cookingTime: cookingTime,
-    //       prepTime: prepTime,
-    //       cookingInstructions: cookingInstructions,
-    //       image: image,
-    //     },
-    //   ],
+      password: password
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
-}
-
-// createUserData(
-//   "John",
-//   "Doe",
-//   "pass123",
-//   "email@email.com",
-//   "birria",
-//   "mexican food",
-//   "tortillas",
-//   "10",
-//   "carne asada",
-//   "2lbs",
-//   "30 min",
-//   "10 min",
-//   "instructions how to make meal",
-//   "image"
-// );
-
+};
 async function updateUserData(
   firstName,
   lastName,
