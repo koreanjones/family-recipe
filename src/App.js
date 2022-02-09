@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import RecipeList from "./components/RecipeList";
+import { getRecipes } from "./api/RecipeApi";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [recipeList, setRecipeList] = useState([]);
+
+  useEffect(() => {
+    const getRecipeList = async () => {
+      const recipesFromFirebase = await getRecipes();
+      setRecipeList(recipesFromFirebase);
+    };
+    
+    getRecipeList();
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Header />
+      {recipeList.length > 0 ? (
+          <RecipeList
+            recipeList={recipeList}
+          />
+      ) : (
+        <h1> No Recipes </h1>
+      )}
     </div>
   );
 }
