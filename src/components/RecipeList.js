@@ -10,13 +10,17 @@ const RecipeList = (recipeList) => {
     <>
       <Grid
         container
-        spacing={2}
+        spacing={6}
         sx={{
-          padding: "10px",
+          justifyContent: "center",
         }}
       >
         {recipes.map((recipe) => (
-          <Grid key={Math.random()} item xs={3} md={2}>
+          <Grid
+            key={Math.random()}
+            item
+            md={2.5}
+          >
             <Recipe key={Math.random()} recipe={recipe} />
           </Grid>
         ))}

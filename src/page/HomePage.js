@@ -1,7 +1,5 @@
 import React from "react";
-import UserModalDialog from "../components/form/AddUserForm";
-import RecipeModalDialog from "../components/form/AddRecipeForm";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import RecipeList from "../components/RecipeList";
 import { Link } from "react-router-dom";
 
@@ -11,11 +9,15 @@ const HomePage = (open) => {
       {open.recipeList === undefined ? (
         console.log("Not working")
       ) : (
-        <div>
+        <>
           <RecipeList recipeList={open.recipeList} />
-          <Link to="/addUserPage">Add User</Link>
-          <Link to="/addRecipePage">Add Recipe</Link>
-        </div>
+          <Link to="/addUserPage">
+            <Button variant="contained">Add User</Button>
+          </Link>
+          <Link to="/addRecipePage">
+            <Button variant="contained">Add Recipe</Button>
+          </Link>
+        </>
       )}
     </>
   );
