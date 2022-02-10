@@ -7,25 +7,28 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 
-export const getRecipes = async () => {
-  const recipes = collection(db, "recipes");
-  const recipeSnapshot = await getDocs(recipes);
-  const recipeList = recipeSnapshot.docs.map((doc) => doc.data());
-  return recipeList;
-};
-
 export const getUsers = async () => {
   const users = collection(db, "users");
   const usersSnapshot = await getDocs(users);
-  console.log(usersSnapshot.docs);
   const usersList = usersSnapshot.docs.map((doc) => doc.data());
-  console.log(usersList);
   return usersList;
 };
 
 // create database and fields.  Will create a new db everytime this is ran.
 
-export async function createUserData(firstName, lastName, password, email) {
+export async function createUserData(
+  firstName,
+  lastName,
+  password,
+  email,
+  recipeTitle,
+  recipeDescription,
+  ingredientName,
+  cookingTime,
+  prepTime,
+  cookingInstructions,
+  image
+) {
   try {
     const docRef = await addDoc(collection(db, "users"), {
       name: {
@@ -33,7 +36,23 @@ export async function createUserData(firstName, lastName, password, email) {
         last: lastName,
       },
       email: email,
-      password: password
+      password: password,
+      recipeList: [
+        {
+          name: recipeTitle,
+          description: recipeDescription,
+          ingredients: [
+            {
+              name: ingredientName,
+            }
+            
+          ],
+          cookingTime: cookingTime,
+          prepTime: prepTime,
+          cookingInstructions: cookingInstructions,
+          image: image,
+        },
+      ],
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
@@ -87,21 +106,21 @@ async function updateUserData(
     ],
   });
 }
-updateUserData(
-  "justin",
-  "luna",
-  "pass123",
-  "email@email.com",
-  "birria",
-  "mexican food",
-  "tortillas",
-  "10",
-  "carne asada",
-  "2lbs",
-  "30 min",
-  "10 min",
-  "instructions how to make meal",
-  "image"
-);
+// updateUserData(
+//   "justin",
+//   "luna",
+//   "pass123",
+//   "email@email.com",
+//   "birria",
+//   "mexican food",
+//   "tortillas",
+//   "10",
+//   "carne asada",
+//   "2lbs",
+//   "30 min",
+//   "10 min",
+//   "instructions how to make meal",
+//   "image"
+// );
 
-getUsers();
+// getUsers();

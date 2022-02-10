@@ -13,7 +13,6 @@ const RecipeList = (recipeList) => {
         spacing={2}
         sx={{
           padding: "10px",
-          justifyContent: "center",
         }}
       >
         {recipes.map((recipe) => (

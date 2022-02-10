@@ -35,7 +35,7 @@ const RecipeForm = ({ handleClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     handleClose();
   };
 
@@ -58,7 +58,6 @@ const RecipeForm = ({ handleClose }) => {
       <TextField
         label="Cooking Time"
         variant="filled"
-        type="email"
         required
         value={cookingTime}
         onChange={(e) => setCookingTime(e.target.value)}
@@ -66,7 +65,6 @@ const RecipeForm = ({ handleClose }) => {
       <TextField
         label="Prep Time"
         variant="filled"
-        type="password"
         required
         value={prepTime}
         onChange={(e) => setPrepTime(e.target.value)}
@@ -88,7 +86,6 @@ const RecipeForm = ({ handleClose }) => {
       <TextField
         label="Ingredients"
         variant="filled"
-        type="email"
         required
         value={ingredients}
         onChange={(e) => setIngredients(e.target.value)}

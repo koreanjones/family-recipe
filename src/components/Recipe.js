@@ -15,6 +15,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -65,9 +66,17 @@ const Recipe = (recipe) => {
   recipe = recipe.recipe;
   return (
     <>
-      {console.log(recipe.name)}
+      {console.log(recipe.recipeList[0].name)}
       <Card sx={{ maxWidth: 345 }}>
-        <CardHeader title={recipe.recipeList[0].name === 'undefind' ? "notworking" : recipe.recipeList[0].name} subheader={"by " + recipe.name.first + " " + recipe.name.last} />
+        <CardActions disableSpacing>
+          <CardHeader
+            title={
+              recipe === "undefind" ? "notworking" : recipe.recipeList[0].name
+            }
+            subheader={"by " + recipe.name.first + " " + recipe.name.last}
+          />
+          <DeleteIcon sx={{ flexGrow: 2 }}/>
+        </CardActions>
         <CardMedia
           component="img"
           height="194"
