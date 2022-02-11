@@ -15,7 +15,8 @@ export const getUsers = async () => {
   return usersList;
 };
 export const getUser = async (id) => {
-  const user = getDoc(doc(db, "users", id))
+  const userSnapshot = await getDoc(doc(db, "users", id))
+  const user = userSnapshot.data()
   return user
 }
 
@@ -82,18 +83,15 @@ export async function updateUserData(
   recipeTitle,
   recipeDescription,
   ingredientName,
-  ingredientAmount,
-  ingredientName2,
-  ingredientAmount2,
   cookingTime,
   prepTime,
   cookingInstructions,
   image
 ) {
   const updateUsers = doc(db, "users", id);
-
+  console.log(updateUsers)
   await updateDoc(updateUsers, {
-    id: {id},
+    id: id,
     name: {
       first: firstName,
       last: lastName,
@@ -107,11 +105,6 @@ export async function updateUserData(
         ingredients: [
           {
             name: ingredientName,
-            amount: ingredientAmount,
-          },
-          {
-            name: ingredientName2,
-            amount: ingredientAmount2,
           },
         ],
         cookingTime: cookingTime,

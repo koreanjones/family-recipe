@@ -3,12 +3,12 @@ import UserModalDialog from '../components/form/AddUserForm';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const AddUserPage = (open) => {
-  console.log(open)
+const AddUserPage = (props) => {
+  console.log(props)
   return (
     <div>
-      <UserModalDialog open={open.open} handleClose={open.handleClose} />
-      <Button variant="contained" onClick={open.handleOpen}>
+      <UserModalDialog open={props.open} handleClose={props.handleClose} />
+      <Button variant="contained" onClick={props.handleOpen}>
         Add User
       </Button>
       <Link to="/">

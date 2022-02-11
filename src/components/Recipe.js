@@ -59,6 +59,7 @@ const ExpandMore = styled((props) => {
 // }
 
 const Recipe = (props) => {
+  console.log(props)
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -98,7 +99,11 @@ const Recipe = (props) => {
               }}
             />
           </IconButton>
-          <IconButton onClick={() => props.updateUser(props.recipe.id)}>
+          <IconButton onClick={() => {
+            props.handleRecipeOpen()
+            console.log("asdfasdfasdfs",props)
+            props.updateUser(props.recipe.id)
+          }}>
             <EditIcon sx={{ flexGrow: 1 }} />
           </IconButton>
         </CardActions>

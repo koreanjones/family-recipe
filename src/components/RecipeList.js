@@ -20,7 +20,7 @@ const RecipeList = (props) => {
             item
             md={2.5}
           >
-            <Recipe key={Math.random()} recipe={recipe} deleteCard={props.deleteCard} updateUser={ props.updateUser }/>
+            <Recipe key={Math.random()} handleRecipeOpen={ props.handleRecipeOpen } recipe={recipe} deleteCard={props.deleteCard} updateUser={ props.updateUser }/>
           </Grid>
         ))}
       </Grid>

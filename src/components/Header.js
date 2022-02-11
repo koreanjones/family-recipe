@@ -6,8 +6,10 @@ const Header = () => {
   return (
     <>
       <PrimarySearchAppBar />
-      <Typography variant="h3">
-        Recipe List
+      <Typography variant="h3" sx={{
+        marginBottom:'20px'
+      }}>
+        
       </Typography>
     </>
   );

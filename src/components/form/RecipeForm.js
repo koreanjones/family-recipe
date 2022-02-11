@@ -23,25 +23,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RecipeForm = ({ props, handleClose }) => {
-  
-  console.log('============',props)
+  console.log("============", props);
   const classes = useStyles();
   // create state variables for each input
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [recipeTitle, setRecipeTitle] = useState("");
-  const [recipeDescription, setRecipeDescription] = useState("");
-  const [cookingTime, setCookingTime] = useState("");
-  const [prepTime, setPrepTime] = useState("");
-  const [cookingInstructions, setCookingInstructions] = useState("");
-  const [image, setImage] = useState("");
-  const [ingredientName, setIngredientName] = useState("");
+  const [id, setId] = useState(props.user.id)
+  const [firstName, setFirstName] = useState(props.user.name.first);
+  const [lastName, setLastName] = useState(props.user.name.last);
+  const [email, setEmail] = useState(props.user.email);
+  const [password, setPassword] = useState(props.user.password);
+  const [recipeTitle, setRecipeTitle] = useState(props.user.recipeList[0].name);
+  const [recipeDescription, setRecipeDescription] = useState(
+    props.user.recipeList[0].description
+  );
+  const [cookingTime, setCookingTime] = useState(
+    props.user.recipeList[0].cookingTime
+  );
+  const [prepTime, setPrepTime] = useState(props.user.recipeList[0].prepTime);
+  const [cookingInstructions, setCookingInstructions] = useState(
+    props.user.recipeList[0].cookingInstructions
+  );
+  const [image, setImage] = useState(props.user.recipeList[0].image);
+  const [ingredientName, setIngredientName] = useState(
+    props.user.recipeList[0].ingredients[0].name
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
     updateUserData(
+      id,
       firstName,
       lastName,
       password,
@@ -60,12 +69,18 @@ const RecipeForm = ({ props, handleClose }) => {
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       <TextField
+        label="id"
+        variant="filled"
+        required
+        placeholder={id}
+        value={id}
+      />
+      <TextField
         label="First Name"
         variant="filled"
         required
         placeholder={firstName}
-        text="kjasdhfadfhkh"
-        value={props.firstName}
+        value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
       />
       <TextField
@@ -81,7 +96,6 @@ const RecipeForm = ({ props, handleClose }) => {
         type="email"
         required
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
         label="Password"
@@ -89,10 +103,9 @@ const RecipeForm = ({ props, handleClose }) => {
         type="password"
         required
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
       />
       <TextField
-        label="Name"
+        label="Recipe Name"
         variant="filled"
         value={recipeTitle}
         onChange={(e) => setRecipeTitle(e.target.value)}
@@ -125,7 +138,6 @@ const RecipeForm = ({ props, handleClose }) => {
         label="image"
         variant="filled"
         value={image}
-        onChange={(e) => setImage(e.target.value)}
       />
       <TextField
         label="Ingredients"

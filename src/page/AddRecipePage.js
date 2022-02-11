@@ -7,10 +7,20 @@ const AddRecipePage = (props) => {
   console.log('asdfasdfasdfas',props);
   return (
     <div>
-      <RecipeModalDialog props={props} open={props.open} handleClose={props.handleClose} />
-      <Button variant="contained" onClick={props.handleOpen}>
-        Update User
-      </Button>
+      <RecipeModalDialog
+        props={props}
+        open={props.open}
+        handleClose={props.handleClose}
+      />
+      {props.user === "" ? (
+        console.log("no user")
+      ) : (
+        <>
+          <Button variant="contained" onClick={props.handleOpen}>
+            Update User
+          </Button>
+        </>
+      )}
       <Link to="/">
         <Button variant="contained">Back</Button>
       </Link>

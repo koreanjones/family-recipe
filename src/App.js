@@ -42,7 +42,7 @@ function App() {
   const handleClose = () => {
     setOpen(false);
     setRecipeOpen(false);
-    setTimeout(() => window.location.reload(), 500);
+    setTimeout(() => window.location.replace('http://localhost:3000/'), 500);
   };
   const getRecipeList = async () => {
     const recipesFromFirebase = await getUsers();
@@ -58,6 +58,7 @@ function App() {
         sx={{
           backgroundColor: "lightgrey",
           textAlign: "center",
+          minHeight: "400px"
         }}
       >
         <Router>
@@ -68,7 +69,7 @@ function App() {
               exact
               element={
                 <HomePage
-                  props={open}
+                  open={open}
                   handleOpen={handleOpen}
                   handleClose={handleClose}
                   handleRecipeOpen={handleRecipeOpen}
@@ -76,6 +77,7 @@ function App() {
                   recipeOpen={recipeOpen}
                   deleteCard={deleteCard}
                   updateUser={updateUser}
+                  user={user}
                 />
               }
             />
@@ -87,7 +89,6 @@ function App() {
                   handleOpen={handleOpen}
                   handleClose={handleClose}
                   handleRecipeOpen={handleRecipeOpen}
-                  recipeList={recipeList}
                   recipeOpen={recipeOpen}
                   user={user}
                 />
