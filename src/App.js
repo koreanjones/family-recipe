@@ -42,7 +42,10 @@ function App() {
   const handleClose = () => {
     setOpen(false);
     setRecipeOpen(false);
-    setTimeout(() => window.location.replace('http://localhost:3000/'), 500);
+    setTimeout(
+      () => window.location.replace("https://recipe-91a35.firebaseapp.com/"),
+      500
+    );
   };
   const getRecipeList = async () => {
     const recipesFromFirebase = await getUsers();
