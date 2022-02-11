@@ -6,9 +6,8 @@ import HomePage from "./page/HomePage";
 import AddRecipePage from "./page/AddRecipePage";
 import AddUserPage from "./page/AddUserPage"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { deleteDoc, updateDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { db } from './firebase.config';
-import { AirlineSeatReclineExtraSharp } from "@mui/icons-material";
 
 function App() {
   const [recipeList, setRecipeList] = useState([]);
@@ -60,7 +59,6 @@ function App() {
       <Box
         sx={{
           backgroundColor: "lightgrey",
-          textAlign: "center",
           minHeight: "400px"
         }}
       >
