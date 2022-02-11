@@ -6,6 +6,8 @@ import HomePage from "./page/HomePage";
 import AddRecipePage from "./page/AddRecipePage";
 import AddUserPage from "./page/AddUserPage"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { deleteDoc, updateDoc, doc } from "firebase/firestore";
+import { db } from './firebase.config';
 
 function App() {
   const [recipeList, setRecipeList] = useState([]);
@@ -23,11 +25,17 @@ function App() {
   const handleRecipeOpen = () => {
     setRecipeOpen(true);
   };
+
+  const deleteCard = async (id) => {
+    await deleteDoc(doc(db, 'users', id));
+    setRecipeList(recipeList.filter((recipe) => recipe.id !== id))
+  }
   // function to handle modal close
   const handleClose = () => {
     setOpen(false);
     setRecipeOpen(false);
-    window.location.reload();
+    setTimeout(() => window.location.reload(), 1000);
+    
     
   };
   const getRecipeList = async () => {
@@ -60,6 +68,7 @@ function App() {
                   handleRecipeOpen={handleRecipeOpen}
                   recipeList={recipeList}
                   recipeOpen={recipeOpen}
+                  deleteCard={deleteCard}
                 />
               }
             />

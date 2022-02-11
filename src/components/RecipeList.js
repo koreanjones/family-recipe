@@ -14,6 +14,7 @@ const RecipeList = (recipeList) => {
         sx={{
           justifyContent: "center",
         }}
+        marginBottom={'2%'}
       >
         {recipes.map((recipe) => (
           <Grid
@@ -21,7 +22,7 @@ const RecipeList = (recipeList) => {
             item
             md={2.5}
           >
-            <Recipe key={Math.random()} recipe={recipe} />
+            <Recipe key={Math.random()} recipe={recipe} deleteCard={ recipeList.deleteCard }/>
           </Grid>
         ))}
       </Grid>

@@ -13,9 +13,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { red } from "@mui/material/colors";
-import { Avatar } from "@mui/material";
-import { maxHeight } from "@mui/system";
+import { Avatar, Button } from "@mui/material";
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -57,32 +58,52 @@ const ExpandMore = styled((props) => {
 //   );
 // }
 
-const Recipe = (recipe) => {
+const Recipe = (props) => {
+  console.log(props)
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  recipe = recipe.recipe;
   return (
     <>
-      {console.log(recipe.recipeList[0].name)}
-      <Card sx={{
-        width: 345
-      }}>
+      {console.log(props.recipe.recipeList[0].name)}
+      <Card
+        sx={{
+          width: 345,
+        }}
+      >
         <CardActions>
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                
-              </Avatar>
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"></Avatar>
             }
             title={
-              recipe === "undefind" ? "notworking" : recipe.recipeList[0].name
+              props.recipe === "undefind"
+                ? "notworking"
+                : props.recipe.recipeList[0].name
             }
-            subheader={"by " + recipe.name.first + " " + recipe.name.last}
+            subheader={
+              "by " + props.recipe.name.first + " " + props.recipe.name.last
+            }
           />
-          <DeleteIcon sx={{ flexGrow: 5 }} />
+          {console.log(props)}
+          <IconButton
+            sx={{
+              flexGrow: 3,
+              marginLeft: "33px",
+            }}
+            onClick={() => props.deleteCard(props.recipe.id)}
+          >
+            <DeleteIcon
+              sx={{
+                flexGrow: 3,
+              }}
+            />
+          </IconButton>
+          <IconButton >
+            <EditIcon sx={{ flexGrow: 1 }} />
+          </IconButton>
         </CardActions>
         <CardMedia
           component="img"
@@ -92,7 +113,7 @@ const Recipe = (recipe) => {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {recipe.recipeList[0].description}
+            {props.recipe.recipeList[0].description}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

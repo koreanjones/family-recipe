@@ -6,8 +6,8 @@ const Header = () => {
   return (
     <>
       <PrimarySearchAppBar />
-      <Typography>
-        <h1>Recipes List</h1>
+      <Typography variant="h3">
+        Recipe List
       </Typography>
     </>
   );

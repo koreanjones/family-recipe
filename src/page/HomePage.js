@@ -4,13 +4,17 @@ import RecipeList from "../components/RecipeList";
 import { Link } from "react-router-dom";
 
 const HomePage = (open) => {
+  
   return (
     <>
       {open.recipeList === undefined ? (
         console.log("Not working")
       ) : (
         <>
-          <RecipeList recipeList={open.recipeList} />
+          <RecipeList
+            recipeList={open.recipeList}
+            deleteCard={open.deleteCard}
+          />
           <Link to="/addUserPage">
             <Button variant="contained">Add User</Button>
           </Link>

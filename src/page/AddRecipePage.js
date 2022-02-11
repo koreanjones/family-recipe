@@ -15,7 +15,9 @@ const AddRecipePage = (open) => {
         Add Recipe
       </Button>
       <Link to="/">
-        <Button variant="contained">Back</Button>
+        <Button variant="contained" onClick={window.location.reload()}>
+          Back
+        </Button>
       </Link>
     </div>
   );
