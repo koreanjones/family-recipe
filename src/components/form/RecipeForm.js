@@ -138,6 +138,7 @@ const RecipeForm = ({ props, handleClose }) => {
         label="image"
         variant="filled"
         value={image}
+        onChange={(e) => setImage(e.target.value)}
       />
       <TextField
         label="Ingredients"
