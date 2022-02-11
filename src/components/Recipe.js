@@ -16,7 +16,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { red } from "@mui/material/colors";
 import { Avatar, Button } from "@mui/material";
-
+import recipeImage from "../components/images/spaghetti.jpeg";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -59,7 +59,6 @@ const ExpandMore = styled((props) => {
 // }
 
 const Recipe = (props) => {
-  console.log(props)
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -67,7 +66,6 @@ const Recipe = (props) => {
 
   return (
     <>
-      {console.log(props.recipe.recipeList[0].name)}
       <Card
         sx={{
           width: 345,
@@ -87,7 +85,6 @@ const Recipe = (props) => {
               "by " + props.recipe.name.first + " " + props.recipe.name.last
             }
           />
-          {console.log(props)}
           <IconButton
             sx={{
               flexGrow: 3,
@@ -101,14 +98,14 @@ const Recipe = (props) => {
               }}
             />
           </IconButton>
-          <IconButton >
+          <IconButton onClick={() => props.updateUser(props.recipe.id)}>
             <EditIcon sx={{ flexGrow: 1 }} />
           </IconButton>
         </CardActions>
         <CardMedia
           component="img"
           height="194"
-          image="https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fill,g_center,w_730,h_913/k%2FPhoto%2FRecipes%2F2021-12-spaghetti%2F211208_ApartmentTherapy_Spaghetti_0172"
+          image={props.recipe.recipeList[0].image}
           alt="Spaghetti Dish"
         />
         <CardContent>

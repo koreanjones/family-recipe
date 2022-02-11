@@ -39,19 +39,6 @@ const UserForm = ({ handleClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      firstName,
-      lastName,
-      password,
-      email,
-      recipeTitle,
-      recipeDescription,
-      ingredientName,
-      cookingTime,
-      prepTime,
-      cookingInstructions,
-      image
-    );
     createUserData(
       firstName,
       lastName,

@@ -1,11 +1,9 @@
 import React from "react";
 import Recipe from "./Recipe";
 import { Grid } from "@mui/material";
-import { FileCopyOutlined } from "@mui/icons-material";
 
-const RecipeList = (recipeList) => {
-  const recipes = recipeList.recipeList;
-  console.log("look here=======>>>>>>", recipeList);
+const RecipeList = (props) => {
+  const recipes = props.recipeList;
   return (
     <>
       <Grid
@@ -22,7 +20,7 @@ const RecipeList = (recipeList) => {
             item
             md={2.5}
           >
-            <Recipe key={Math.random()} recipe={recipe} deleteCard={ recipeList.deleteCard }/>
+            <Recipe key={Math.random()} recipe={recipe} deleteCard={props.deleteCard} updateUser={ props.updateUser }/>
           </Grid>
         ))}
       </Grid>

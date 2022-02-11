@@ -3,21 +3,16 @@ import RecipeModalDialog from '../components/form/AddRecipeForm';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const AddRecipePage = (open) => {
+const AddRecipePage = (props) => {
+  console.log('asdfasdfasdfas',props);
   return (
     <div>
-      <RecipeModalDialog
-        open={open.recipeOpen}
-        handleClose={open.handleClose}
-      />
-
-      <Button variant="contained" onClick={open.handleRecipeOpen}>
-        Add Recipe
+      <RecipeModalDialog props={props} open={props.open} handleClose={props.handleClose} />
+      <Button variant="contained" onClick={props.handleOpen}>
+        Update User
       </Button>
       <Link to="/">
-        <Button variant="contained" onClick={window.location.reload()}>
-          Back
-        </Button>
+        <Button variant="contained">Back</Button>
       </Link>
     </div>
   );

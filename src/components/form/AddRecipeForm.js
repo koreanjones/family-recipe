@@ -2,11 +2,11 @@ import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import RecipeForm from "./RecipeForm";
 
-const RecipeModalDialog = ({ open, handleClose }) => {
+const RecipeModalDialog = ({props, open, handleClose }) => {
   return (
     // props received from App.js
     <Dialog open={open} onClose={handleClose}>
-      <RecipeForm handleClose={handleClose} />
+      <RecipeForm handleClose={handleClose} props={props} />
     </Dialog>
   );
 };

@@ -3,17 +3,17 @@ import { Button } from "@mui/material";
 import RecipeList from "../components/RecipeList";
 import { Link } from "react-router-dom";
 
-const HomePage = (open) => {
-  
+const HomePage = (props) => {
   return (
     <>
-      {open.recipeList === undefined ? (
+      {props.recipeList === undefined ? (
         console.log("Not working")
       ) : (
         <>
           <RecipeList
-            recipeList={open.recipeList}
-            deleteCard={open.deleteCard}
+            recipeList={props.recipeList}
+              deleteCard={props.deleteCard}
+              updateUser={props.updateUser}
           />
           <Link to="/addUserPage">
             <Button variant="contained">Add User</Button>
