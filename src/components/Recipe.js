@@ -38,9 +38,7 @@ const Recipe = (props) => {
   return (
     <>
       {console.log(props.user.recipeList)}
-      {props.user.recipeList === undefined ? (
-        "no recipe"
-      ) : (
+      
         <Card
           sx={{
             width: 345,
@@ -127,7 +125,7 @@ const Recipe = (props) => {
             </CardContent>
           </Collapse>
         </Card>
-      )}
+     
     </>
   );
 };

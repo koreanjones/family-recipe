@@ -16,6 +16,7 @@ const RecipeList = (props) => {
         marginBottom={'2%'}
       >
         {users.map((user) => (
+          user.recipeList !== undefined &&
           <Grid
             key={Math.random()}
             item
