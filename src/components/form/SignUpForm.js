@@ -6,16 +6,15 @@ import { createUserData } from "../../api/RecipeApi";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     padding: theme.spacing(2),
-    width: '500px',
-    display: "inline-block",
 
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      
+      width: "300px",
     },
     "& .MuiButtonBase-root": {
       margin: theme.spacing(2),
@@ -23,7 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserForm = ({ handleClose }) => {
+const SignUpForm = ({ props, handleClose }) => {
+  console.log("============", props);
+
   const classes = useStyles();
   // create state variables for each input
   const [firstName, setFirstName] = useState("");
@@ -45,13 +46,6 @@ const UserForm = ({ handleClose }) => {
       lastName,
       password,
       email,
-      recipeTitle,
-      recipeDescription,
-      ingredientName,
-      cookingTime,
-      prepTime,
-      cookingInstructions,
-      image
     );
 
     handleClose();
@@ -65,6 +59,7 @@ const UserForm = ({ handleClose }) => {
         required
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
+        display={'none'}
       />
       <TextField
         label="Last Name"
@@ -89,49 +84,8 @@ const UserForm = ({ handleClose }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <TextField
-        label="Name"
-        variant="filled"
-        value={recipeTitle}
-        onChange={(e) => setRecipeTitle(e.target.value)}
-      />
-      <TextField
-        label="Description"
-        variant="filled"
-        value={recipeDescription}
-        onChange={(e) => setRecipeDescription(e.target.value)}
-      />
-      <TextField
-        label="Cooking Time"
-        variant="filled"
-        value={cookingTime}
-        onChange={(e) => setCookingTime(e.target.value)}
-      />
-      <TextField
-        label="Prep Time"
-        variant="filled"
-        value={prepTime}
-        onChange={(e) => setPrepTime(e.target.value)}
-      />
-      <TextField
-        label="Cooking Instructions"
-        variant="filled"
-        value={cookingInstructions}
-        onChange={(e) => setCookingInstructions(e.target.value)}
-      />
-      <TextField
-        label="image"
-        variant="filled"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-      />
-      <TextField
-        label="Ingredients"
-        variant="filled"
-        value={ingredientName}
-        onChange={(e) => setIngredientName(e.target.value)}
-      />
-      <div justifyContent= "center">
+      
+      <div >
         <Button variant="contained" onClick={handleClose}>
           Cancel
         </Button>
@@ -143,4 +97,4 @@ const UserForm = ({ handleClose }) => {
   );
 };
 
-export default UserForm;
+export default SignUpForm;

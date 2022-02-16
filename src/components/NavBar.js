@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Button } from "@mui/material";
+import SignUpModalDialog from "./form/SignUpModalDialog";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -56,12 +58,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -185,7 +188,18 @@ export default function PrimarySearchAppBar() {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
+          >
+            <SignUpModalDialog
+              props={props}
+              open={props.open}
+              handleClose={props.handleClose}
+            />
+            <Button variant="contained" onClick={props.handleSignUpOpen}>
+              Sign Up
+            </Button>
+
             <IconButton
               size="large"
               aria-label="show 4 new mails"

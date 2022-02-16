@@ -9,11 +9,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from './firebase.config';
 
-function App() {
+const App = () => {
   const [recipeList, setRecipeList] = useState([]);
   // declare a new state variable for modal open
   const [open, setOpen] = useState(false);
   const [recipeOpen, setRecipeOpen] = useState(false);
+  const [signUpOpen, setSignUpOpen] = useState(false)
   const [user, setUser] = useState('')
   
   // function to handle modal open
@@ -26,6 +27,9 @@ function App() {
   const handleRecipeOpen = () => {
     setRecipeOpen(true);
   };
+  const handleSignUpOpen = () => {
+    setSignUpOpen(true)
+  }
 
   const deleteCard = async (id) => {
     await deleteDoc(doc(db, 'users', id));
@@ -63,7 +67,12 @@ function App() {
         }}
       >
         <Router>
-          <Header />
+          <Header
+            open={signUpOpen}
+            handleClose = { handleClose }
+            handleSignUpOpen={handleSignUpOpen}
+            user = {user}
+          />
           <Routes>
             <Route
               path="/"

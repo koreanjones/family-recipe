@@ -44,21 +44,21 @@ export async function createUserData(
       },
       email: email,
       password: password,
-      recipeList: [
-        {
-          name: recipeTitle,
-          description: recipeDescription,
-          ingredients: [
-            {
-              name: ingredientName,
-            },
-          ],
-          cookingTime: cookingTime,
-          prepTime: prepTime,
-          cookingInstructions: cookingInstructions,
-          image: "/static/media/spaghetti.02160a60a74774d7f351.jpeg",
-        },
-      ],
+      // recipeList: [
+      //   {
+      //     name: recipeTitle,
+      //     description: recipeDescription,
+      //     ingredients: [
+      //       {
+      //         name: ingredientName,
+      //       },
+      //     ],
+      //     cookingTime: cookingTime,
+      //     prepTime: prepTime,
+      //     cookingInstructions: cookingInstructions,
+      //     image: "/static/media/spaghetti.02160a60a74774d7f351.jpeg",
+      //   },
+      // ],
     });
     console.log("Document written with ID: ", docRef.id);
     updateUserIdData(docRef.id)

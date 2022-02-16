@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import RecipeModalDialog from "../components/form/AddRecipeForm";
 
 const HomePage = (props) => {
-  console.log("00000000>", props)
   return (
     <>
       <div>
@@ -43,7 +42,7 @@ const HomePage = (props) => {
             </Link>
           </Grid>
           {props.user === "" ? (
-            console.log("not working")
+            console.log("Loading")
           ) : (
             <Grid container direction="row" justifyContent="center">
               <Link to="/addRecipePage">

@@ -3,7 +3,8 @@ import Recipe from "./Recipe";
 import { Grid } from "@mui/material";
 
 const RecipeList = (props) => {
-  const recipes = props.recipeList;
+  const users = props.recipeList;
+  console.log(users)
   return (
     <>
       <Grid
@@ -14,13 +15,13 @@ const RecipeList = (props) => {
         }}
         marginBottom={'2%'}
       >
-        {recipes.map((recipe) => (
+        {users.map((user) => (
           <Grid
             key={Math.random()}
             item
             md={2.5}
           >
-            <Recipe key={Math.random()} handleRecipeOpen={ props.handleRecipeOpen } recipe={recipe} deleteCard={props.deleteCard} updateUser={ props.updateUser }/>
+            <Recipe key={Math.random()} handleRecipeOpen={ props.handleRecipeOpen } user={user} deleteCard={props.deleteCard} updateUser={ props.updateUser }/>
           </Grid>
         ))}
       </Grid>
