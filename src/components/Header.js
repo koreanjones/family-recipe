@@ -10,6 +10,8 @@ const Header = (props) => {
         handleClose={props.handleClose}
         handleSignUpOpen={props.handleSignUpOpen}
         open={props.open}
+        logInOpen = {props.logInOpen}
+        handleLogInOpen = {props.handleLogInOpen}
       
       />
       <Typography variant="h3" sx={{

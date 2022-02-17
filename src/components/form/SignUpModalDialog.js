@@ -1,14 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Dialog from "@material-ui/core/Dialog";
-import SignUpForm from './SignUpForm'
+import SignUpForm from "./SignUpForm";
 
-const SignUpModalDialog = ({ props, open, handleClose }) => {
+const SignUpModalDialog = ({ props, handleClose }) => {
   return (
-    // props received from App.js
-    <Dialog open={open} onClose={handleClose}>
+    <div>
       <SignUpForm handleClose={handleClose} props={props} />
-    </Dialog>
+    </div>
   );
 };
+//   return (
+//     // props received from App.js
+//     // <Dialog open={open} onClose={handleClose}>
+//     //   <SignUpForm handleClose={handleClose} props={props} />
+//     // </Dialog>
+//   );;
 
 export default SignUpModalDialog;

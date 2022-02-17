@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUpForm = ({ props, handleClose }) => {
+const LogInForm = ({ props, handleClose }) => {
   console.log("============", props, handleClose);
 
   const classes = useStyles();
@@ -53,19 +53,19 @@ const SignUpForm = ({ props, handleClose }) => {
   const [image, setImage] = useState("");
   const [ingredientName, setIngredientName] = useState("");
 
-  const { signup, currentUser } = useAuth();
+  const { login, currentUser } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUserData(firstName, lastName, password, email);
-    signup(email, password);
+    login(email, password);
     handleClose();
   };
 
   return (
-    <>
+      <>
+          {console.log("dsadd",props)}
       <Modal
-        open={props.open}
+        open={props.logInOpen}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -91,11 +91,11 @@ const SignUpForm = ({ props, handleClose }) => {
             />
 
             <div>
-              <Button variant="contained" onClick={handleClose}>
+              <Button variant="contained" onClick={props.handleClose}>
                 Cancel
               </Button>
               <Button type="submit" variant="contained" color="primary">
-                Signup
+                Log In
               </Button>
             </div>
           </form>
@@ -148,4 +148,4 @@ const SignUpForm = ({ props, handleClose }) => {
   );
 };
 
-export default SignUpForm;
+export default LogInForm;

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import SignUpModalDialog from "./form/SignUpModalDialog";
+import LogInModalDialog from "./form/LogInModalDialog";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -16,7 +18,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
+import { useAuth } from "../contexts/AuthContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -61,10 +63,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const { currentUser, logout } = useAuth();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    logout();
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -82,7 +87,9 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
+  
+  console.log("lklklkllkl",props);
+  
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -160,6 +167,7 @@ export default function PrimarySearchAppBar(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
+        
         <Toolbar>
           <IconButton
             size="large"
@@ -176,7 +184,7 @@ export default function PrimarySearchAppBar(props) {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            <Link to="/">HomePage</Link>
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -193,14 +201,34 @@ export default function PrimarySearchAppBar(props) {
           >
             <SignUpModalDialog
               props={props}
-              open={props.open}
               handleClose={props.handleClose}
             />
-            <Button variant="contained" onClick={props.handleSignUpOpen}>
-              Sign Up
-            </Button>
+            <LogInModalDialog
+              
+              props={props}
+              handleClose={props.handleClose}
 
-            <IconButton
+            />
+            {currentUser ? (
+              <>
+                <span>{currentUser.email}</span>
+                <Button variant="contained" onClick={handleLogOut}>
+                  {" "}
+                  Log Out{" "}
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="contained" onClick={props.handleSignUpOpen}>
+                  Sign Up
+                </Button>
+                <Button variant="contained" onClick={props.handleLogInOpen}>
+                  Log In
+                </Button>
+              </>
+            )}
+
+            {/* <IconButton
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
@@ -240,7 +268,7 @@ export default function PrimarySearchAppBar(props) {
               color="inherit"
             >
               <MoreIcon />
-            </IconButton>
+            </IconButton> */}
           </Box>
         </Toolbar>
       </AppBar>
