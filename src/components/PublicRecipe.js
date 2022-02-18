@@ -29,15 +29,13 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const Recipe = (props) => {
-  console.log(props.recipe);
+const PublicRecipe = (props) => {
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   return (
     <>
-      {console.log(props.recipe)}
       <Card
         sx={{
           width: 345,
@@ -48,16 +46,16 @@ const Recipe = (props) => {
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"></Avatar>
             }
-            title={
-              props.recipe === "undefind" ? "notworking" : props.recipe.name
-            }
+            // title={
+            //   props.recipe === "undefind" ? "notworking" : props.recipe.name
+            // }
           />
           <IconButton
             sx={{
               flexGrow: 3,
               marginLeft: "33px",
             }}
-            onClick={() => props.deleteCard(props.recipe.recipeId)}
+            onClick={() => props.deleteCard(props.user.id)}
           >
             <DeleteIcon
               sx={{
@@ -65,20 +63,26 @@ const Recipe = (props) => {
               }}
             />
           </IconButton>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              props.handleRecipeOpen();
+              console.log("asdfasdfasdfs", props);
+              props.updateUser(props.user.id);
+            }}
+          >
             <EditIcon sx={{ flexGrow: 1 }} />
           </IconButton>
         </CardActions>
-        <CardMedia
-          component="img"
-          height="194"
-          image={props.recipe.image}
-          alt=""
-        />
+        {/* <CardMedia
+            component="img"
+            height="194"
+            image={props.user.recipeList[0].image}
+            alt="Spaghetti Dish"
+          /> */}
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {props.recipe.description}
-          </Typography>
+          {/* <Typography variant="body2" color="text.secondary">
+              {props.user.recipeList[0].description}
+            </Typography> */}
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
@@ -101,11 +105,15 @@ const Recipe = (props) => {
             <Typography paragraph>DIRECTIONS -</Typography>
 
             <Typography paragraph>
-              {props.recipe.cookingInstructions}
+              Boil water over high heat and pu the noodles in when boiling.
             </Typography>
-            <Typography paragraph>{props.recipe.prepTime}</Typography>
-            <Typography>{props.recipe.cookingTime}</Typography>
-            <Typography>{props.recipe.ingredients[0].name}</Typography>
+            <Typography paragraph>
+              Add beef to pan and brown. once the meat is brown add sauce.
+            </Typography>
+            <Typography>
+              Set aside off of the heat to let rest for 10 minutes, and then
+              serve.
+            </Typography>
           </CardContent>
         </Collapse>
       </Card>
@@ -113,4 +121,4 @@ const Recipe = (props) => {
   );
 };
 
-export default Recipe;
+export default PublicRecipe;

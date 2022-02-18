@@ -3,7 +3,6 @@ import PrimarySearchAppBar from './NavBar';
 import Typography from "@mui/material/Typography";
 
 const Header = (props) => {
-  console.log(props)
   return (
     <>
       <PrimarySearchAppBar

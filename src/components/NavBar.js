@@ -88,7 +88,6 @@ export default function PrimarySearchAppBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   
-  console.log("lklklkllkl",props);
   
   const menuId = "primary-search-account-menu";
   const renderMenu = (

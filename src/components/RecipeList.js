@@ -3,8 +3,19 @@ import Recipe from "./Recipe";
 import { Grid } from "@mui/material";
 
 const RecipeList = (props) => {
-  const users = props.recipeList;
-  console.log(users)
+  const privateRecipes = [];
+  const recipes = props.recipeList;
+  console.log(props.recipeList);
+  console.log(privateRecipes);
+  console.log(props.currentUser.uid);
+
+  props.currentUser && console.log(props.currentUser.uid);
+  recipes.map(
+    (recipe) =>
+      recipe.id === props.currentUser.uid && privateRecipes.push(recipe)
+  );
+  console.log(privateRecipes);
+
   return (
     <>
       <Grid
@@ -13,18 +24,14 @@ const RecipeList = (props) => {
         sx={{
           justifyContent: "center",
         }}
-        marginBottom={'2%'}
+        marginBottom={"2%"}
       >
-        {users.map((user) => (
-          user.recipeList !== undefined &&
-          <Grid
-            key={Math.random()}
-            item
-            md={2.5}
-          >
-            <Recipe key={Math.random()} handleRecipeOpen={ props.handleRecipeOpen } user={user} deleteCard={props.deleteCard} updateUser={ props.updateUser }/>
-          </Grid>
-        ))}
+        {props.currentUser &&
+          privateRecipes.map((recipe) => (
+            <Grid key={Math.random()} item md={2.5}>
+              <Recipe recipe={recipe} deleteCard={props.deleteCard} />
+            </Grid>
+          ))}
       </Grid>
     </>
   );

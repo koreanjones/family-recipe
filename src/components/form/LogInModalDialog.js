@@ -1,19 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import LogInForm from "./LogInForm";
 
-const LogInModalDialog = ({ props,  handleClose }) => {
-console.log("porrprorrr",props)
-  return (
-    <div>
-      <LogInForm handleClose={handleClose} props={props} />
-    </div>
-  );
-};
-//   return (
-//     // props received from App.js
-//     // <Dialog open={open} onClose={handleClose}>
-//     //   <SignUpForm handleClose={handleClose} props={props} />
-//     // </Dialog>
-//   );;
+const LogInModalDialog = ({ props, handleClose }) => (
+  <LogInForm handleClose={handleClose} props={props} />
+);
 
 export default LogInModalDialog;

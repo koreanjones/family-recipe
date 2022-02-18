@@ -15,121 +15,59 @@ export const getUsers = async () => {
   return usersList;
 };
 export const getUser = async (id) => {
-  const userSnapshot = await getDoc(doc(db, "users", id))
-  const user = userSnapshot.data()
-  return user
+  const userSnapshot = await getDoc(doc(db, "users", id));
+  const user = userSnapshot.data();
+  return user;
+};
+export const getUserRecipes = async (id) => {
+  const userRecipes = collection(db, "recipes");
+  const userRecipesSnapshot = await getDocs(userRecipes);
+  const userRecipeList = userRecipesSnapshot.docs.map(doc => doc.data())
+  return userRecipeList
+
 }
 
 // create database and fields.  Will create a new db everytime this is ran.
-
-export async function createUserData(
-  firstName,
-  lastName,
-  password,
-  email,
+export async function createRecipeData(
+  id,
   recipeTitle,
   recipeDescription,
   ingredientName,
   cookingTime,
   prepTime,
   cookingInstructions,
-  image
+  image,
+  privateRecipe
 ) {
   try {
-    const docRef = await addDoc(collection(db, "users"), {
-      id: "",
-      name: {
-        first: firstName,
-        last: lastName,
-      },
-      email: email,
-      password: password,
-      // recipeList: [
-      //   {
-      //     name: recipeTitle,
-      //     description: recipeDescription,
-      //     ingredients: [
-      //       {
-      //         name: ingredientName,
-      //       },
-      //     ],
-      //     cookingTime: cookingTime,
-      //     prepTime: prepTime,
-      //     cookingInstructions: cookingInstructions,
-      //     image: "/static/media/spaghetti.02160a60a74774d7f351.jpeg",
-      //   },
-      // ],
+    console.log(id)
+    const docRef = await addDoc(collection(db, "recipes"), {
+      id: id,
+      recipeId: '',
+      name: recipeTitle,
+      description: recipeDescription,
+      ingredients: [
+        {
+          name: ingredientName,
+        },
+      ],
+      cookingTime: cookingTime,
+      prepTime: prepTime,
+      cookingInstructions: cookingInstructions,
+      image: image,
+      privateRecipe: privateRecipe
     });
-    console.log("Document written with ID: ", docRef.id);
-    updateUserIdData(docRef.id)
-    
+    console.log("Document written with ID: ", id);
+    console.log(docRef.id)
+    updateRecipeIdData(docRef.id)
   } catch (e) {
     console.error("Error adding document: ", e);
   }
-};
-async function updateUserIdData(id) {
-  const updateUsers = doc(db, "users", id);
+}
+async function updateRecipeIdData(id) {
+  const updateRecipe = doc(db, "recipes", id);
 
-  await updateDoc(updateUsers, {
-    id: id,
+  await updateDoc(updateRecipe, {
+    recipeId: id,
   });
 }
-export async function updateUserData(
-  id,
-  firstName,
-  lastName,
-  password,
-  email,
-  recipeTitle,
-  recipeDescription,
-  ingredientName,
-  cookingTime,
-  prepTime,
-  cookingInstructions,
-  image
-) {
-  const updateUsers = doc(db, "users", id);
-  console.log(updateUsers)
-  await updateDoc(updateUsers, {
-    id: id,
-    name: {
-      first: firstName,
-      last: lastName,
-    },
-    email: email,
-    password: password,
-    recipeList: [
-      {
-        name: recipeTitle,
-        description: recipeDescription,
-        ingredients: [
-          {
-            name: ingredientName,
-          },
-        ],
-        cookingTime: cookingTime,
-        prepTime: prepTime,
-        cookingInstructions: cookingInstructions,
-        image: image,
-      },
-    ],
-  });
-}
-// updateUserData(
-//   "justin",
-//   "luna",
-//   "pass123",
-//   "email@email.com",
-//   "birria",
-//   "mexican food",
-//   "tortillas",
-//   "10",
-//   "carne asada",
-//   "2lbs",
-//   "30 min",
-//   "10 min",
-//   "instructions how to make meal",
-//   "image"
-// );
-
-// getUsers();
