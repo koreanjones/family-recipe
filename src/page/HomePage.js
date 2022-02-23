@@ -4,11 +4,10 @@ import PublicRecipeList from "../components/PublicRecipeList";
 import { Link } from "react-router-dom";
 
 const HomePage = (props) => {
-  const publicRecipeList = []
- props.recipeList.map(recipe => {
-    recipe.privateRecipe !== true && publicRecipeList.push(recipe) 
-    
-  })
+  const publicRecipeList = [];
+  props.recipeList.map((recipe) => {
+    recipe.privateRecipe !== true && publicRecipeList.push(recipe);
+  });
   return (
     <>
       {PublicRecipeList === "" ? (

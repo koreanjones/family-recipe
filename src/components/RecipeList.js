@@ -5,16 +5,10 @@ import { Grid } from "@mui/material";
 const RecipeList = (props) => {
   const privateRecipes = [];
   const recipes = props.recipeList;
-  console.log(props.recipeList);
-  console.log(privateRecipes);
-  console.log(props.currentUser.uid);
-
-  props.currentUser && console.log(props.currentUser.uid);
   recipes.map(
     (recipe) =>
       recipe.id === props.currentUser.uid && privateRecipes.push(recipe)
   );
-  console.log(privateRecipes);
 
   return (
     <>
@@ -29,7 +23,11 @@ const RecipeList = (props) => {
         {props.currentUser &&
           privateRecipes.map((recipe) => (
             <Grid key={Math.random()} item md={2.5}>
-              <Recipe recipe={recipe} deleteCard={props.deleteCard} />
+              <Recipe
+                recipe={recipe}
+                deleteCard={props.deleteCard}
+                updateRecipeCard={props.updateRecipeCard}
+              />
             </Grid>
           ))}
       </Grid>

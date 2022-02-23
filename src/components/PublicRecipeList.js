@@ -3,8 +3,6 @@ import Recipe from "./Recipe";
 import { Grid } from "@mui/material";
 
 const PublicRecipeList = (props) => {
-  console.log(props)
-  console.log(props.recipeList)
   return (
     <>
       <Grid
@@ -15,7 +13,6 @@ const PublicRecipeList = (props) => {
         }}
         marginBottom={"2%"}
       >
-        {console.log(props.recipeList)}
         {props.recipeList.map(
           (recipe) =>
             recipe.privateRecipe === false && (

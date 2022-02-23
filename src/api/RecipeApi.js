@@ -22,10 +22,14 @@ export const getUser = async (id) => {
 export const getUserRecipes = async (id) => {
   const userRecipes = collection(db, "recipes");
   const userRecipesSnapshot = await getDocs(userRecipes);
-  const userRecipeList = userRecipesSnapshot.docs.map(doc => doc.data())
-  return userRecipeList
-
-}
+  const userRecipeList = userRecipesSnapshot.docs.map((doc) => doc.data());
+  return userRecipeList;
+};
+export const getRecipe = async (recipeId) => {
+  const recipeSnapShot = await getDoc(doc(db, "recipes", recipeId));
+  const recipe = recipeSnapShot.data();
+  return recipe;
+};
 
 // create database and fields.  Will create a new db everytime this is ran.
 export async function createRecipeData(
@@ -40,10 +44,10 @@ export async function createRecipeData(
   privateRecipe
 ) {
   try {
-    console.log(id)
+    console.log(id);
     const docRef = await addDoc(collection(db, "recipes"), {
       id: id,
-      recipeId: '',
+      recipeId: "",
       name: recipeTitle,
       description: recipeDescription,
       ingredients: [
@@ -55,11 +59,45 @@ export async function createRecipeData(
       prepTime: prepTime,
       cookingInstructions: cookingInstructions,
       image: image,
-      privateRecipe: privateRecipe
+      privateRecipe: privateRecipe,
     });
     console.log("Document written with ID: ", id);
-    console.log(docRef.id)
-    updateRecipeIdData(docRef.id)
+    console.log(docRef.id);
+    updateRecipeIdData(docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+export async function updateRecipeData(
+  recipeId,
+  recipeTitle,
+  recipeDescription,
+  ingredientName,
+  cookingTime,
+  prepTime,
+  cookingInstructions,
+  image,
+  privateRecipe
+) {
+  try {
+    console.log("", recipeId);
+    const updateRecipe = doc(db, "recipes", recipeId);
+
+    await updateDoc(updateRecipe, {
+      name: recipeTitle,
+      description: recipeDescription,
+      ingredients: [
+        {
+          name: ingredientName,
+        },
+      ],
+      cookingTime: cookingTime,
+      prepTime: prepTime,
+      cookingInstructions: cookingInstructions,
+      image: image,
+      privateRecipe: privateRecipe,
+    });
+    console.log("Document written with ID: ", recipeId);
   } catch (e) {
     console.error("Error adding document: ", e);
   }

@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUpForm = ({ props, handleClose }) => {
-
   const classes = useStyles();
   // create state variables for each input
   const [firstName, setFirstName] = useState("");
@@ -55,7 +54,7 @@ const SignUpForm = ({ props, handleClose }) => {
   const { signup, currentUser } = useAuth();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     signup(email, password);
     handleClose();
   };
@@ -70,7 +69,6 @@ const SignUpForm = ({ props, handleClose }) => {
       >
         <Box sx={style}>
           <form className={classes.root} onSubmit={handleSubmit}>
-            
             <TextField
               label="Email"
               variant="filled"

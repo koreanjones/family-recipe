@@ -1,5 +1,5 @@
-import React from 'react';
-import PrimarySearchAppBar from './NavBar';
+import React from "react";
+import PrimarySearchAppBar from "./NavBar";
 import Typography from "@mui/material/Typography";
 
 const Header = (props) => {
@@ -9,15 +9,15 @@ const Header = (props) => {
         handleClose={props.handleClose}
         handleSignUpOpen={props.handleSignUpOpen}
         open={props.open}
-        logInOpen = {props.logInOpen}
-        handleLogInOpen = {props.handleLogInOpen}
-      
+        logInOpen={props.logInOpen}
+        handleLogInOpen={props.handleLogInOpen}
       />
-      <Typography variant="h3" sx={{
-        marginBottom:'20px'
-      }}>
-        
-      </Typography>
+      <Typography
+        variant="h3"
+        sx={{
+          marginBottom: "20px",
+        }}
+      ></Typography>
     </>
   );
 };

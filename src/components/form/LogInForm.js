@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LogInForm = ({ props, handleClose }) => {
-
   const classes = useStyles();
   // create state variables for each input
   const [firstName, setFirstName] = useState("");
@@ -60,7 +59,7 @@ const LogInForm = ({ props, handleClose }) => {
   };
 
   return (
-      <>
+    <>
       <Modal
         open={props.logInOpen}
         onClose={handleClose}
@@ -69,7 +68,6 @@ const LogInForm = ({ props, handleClose }) => {
       >
         <Box sx={style}>
           <form className={classes.root} onSubmit={handleSubmit}>
-            
             <TextField
               label="Email"
               variant="filled"

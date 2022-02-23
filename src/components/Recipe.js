@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -15,8 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { red } from "@mui/material/colors";
-import { Avatar, Button } from "@mui/material";
-import recipeImage from "../components/images/spaghetti.jpeg";
+import { Avatar } from "@mui/material";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -30,14 +29,12 @@ const ExpandMore = styled((props) => {
 }));
 
 const Recipe = (props) => {
-  console.log(props.recipe);
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   return (
     <>
-      {console.log(props.recipe)}
       <Card
         sx={{
           width: 345,
@@ -65,7 +62,9 @@ const Recipe = (props) => {
               }}
             />
           </IconButton>
-          <IconButton>
+          <IconButton
+            onClick={() => props.updateRecipeCard(props.recipe.recipeId)}
+          >
             <EditIcon sx={{ flexGrow: 1 }} />
           </IconButton>
         </CardActions>

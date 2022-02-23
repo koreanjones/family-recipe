@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import { getUsers, getUser, getUserRecipes } from "./api/RecipeApi";
+import { getRecipe, getUserRecipes } from "./api/RecipeApi";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import HomePage from "./page/HomePage";
@@ -13,28 +13,24 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "./firebase.config";
 import PrivateRoute from "./components/PrivateRoute";
 import UserPage from "./page/UserPage";
-import { useAuth } from "./contexts/AuthContext";
 
 const App = () => {
   const [recipeList, setRecipeList] = useState([]);
   // declare a new state variable for modal open
   const [open, setOpen] = useState(false);
-  const [recipeOpen, setRecipeOpen] = useState(false);
+  const [updateRecipeOpen, setUpdateRecipeOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
+  const [recipe, setRecipe] = useState("");
   const [createRecipeOpen, setCreateRecipeOpen] = useState(false);
-  const [user, setUser] = useState("");
   const [logInOpen, setLogInOpen] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     getRecipes();
   }, []);
+
   // function to handle modal open
   const handleOpen = () => {
     setOpen(true);
-  };
-  const handleRecipeOpen = () => {
-    setRecipeOpen(true);
   };
   const handleSignUpOpen = () => {
     setSignUpOpen(true);
@@ -48,24 +44,34 @@ const App = () => {
   };
 
   const deleteCard = async (id) => {
-     setRecipeList(recipeList.filter((recipe) => recipe.recipeId !== id));
+    setRecipeList(recipeList.filter((recipe) => recipe.recipeId !== id));
     await deleteDoc(doc(db, "recipes", id));
-    console.log(recipeList)
-   
+    console.log(recipeList);
+  };
+  const handleUpdateRecipeOpen = () => {
+    setUpdateRecipeOpen(true);
   };
 
-  const updateUser = async (id) => {
-    setRecipeOpen(true);
-    setUser(await getUser(id));
+  const updateRecipeCard = async (id) => {
+    setRecipe(await getSingleRecipe(id));
+    // const recipe = await getSingleRecipe(id)
+    //   .then(setRecipe(recipe))
+    handleUpdateRecipeOpen();
+  };
+
+  const getSingleRecipe = async (id) => {
+    const recipe = await getRecipe(id);
+    return recipe;
   };
 
   // function to handle modal close
   const handleClose = () => {
     setOpen(false);
-    setRecipeOpen(false);
     setSignUpOpen(false);
     setLogInOpen(false);
-    
+    setUpdateRecipeOpen(false);
+    getRecipes();
+
     // navigate("/");
     // setTimeout(
     //   () => window.location.replace("https://recipe-91a35.firebaseapp.com/"),
@@ -74,8 +80,12 @@ const App = () => {
   };
   const handleRecipeFormClose = () => {
     setCreateRecipeOpen(false);
-   
-  }
+    getRecipes();
+    // setTimeout(
+    //   () => window.location.replace("https://recipe-91a35.firebaseapp.com/"),
+    //   500
+    // );
+  };
   const getRecipes = async (id) => {
     const recipesFromFirebase = await getUserRecipes(id);
     setRecipeList(recipesFromFirebase);
@@ -94,7 +104,6 @@ const App = () => {
           logInOpen={logInOpen}
           handleClose={handleClose}
           handleSignUpOpen={handleSignUpOpen}
-          user={user}
           handleLogInOpen={handleLogInOpen}
         />
         <Routes>
@@ -105,12 +114,8 @@ const App = () => {
               <HomePage
                 handleOpen={handleOpen}
                 handleClose={handleClose}
-                handleRecipeOpen={handleRecipeOpen}
                 recipeList={recipeList}
-                recipeOpen={recipeOpen}
                 deleteCard={deleteCard}
-                updateUser={updateUser}
-                user={user}
               />
             }
           />
@@ -119,11 +124,15 @@ const App = () => {
               path="/userPage"
               element={
                 <UserPage
-                  handleClose={handleRecipeFormClose}
+                  updateRecipeOpen={updateRecipeOpen}
+                  handleClose={handleClose}
+                  handleRecipeFormClose={handleRecipeFormClose}
                   handleCreateRecipeOpen={handleCreateRecipeOpen}
                   createRecipeOpen={createRecipeOpen}
+                  updateRecipeCard={updateRecipeCard}
                   recipeList={recipeList}
                   deleteCard={deleteCard}
+                  recipe={recipe}
                 />
               }
             />

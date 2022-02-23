@@ -87,8 +87,7 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  
-  
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -166,7 +165,6 @@ export default function PrimarySearchAppBar(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        
         <Toolbar>
           <IconButton
             size="large"
@@ -198,22 +196,16 @@ export default function PrimarySearchAppBar(props) {
           <Box
             sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
           >
-            <SignUpModalDialog
-              props={props}
-              handleClose={props.handleClose}
-            />
-            <LogInModalDialog
-              
-              props={props}
-              handleClose={props.handleClose}
-
-            />
+            <SignUpModalDialog props={props} handleClose={props.handleClose} />
+            <LogInModalDialog props={props} handleClose={props.handleClose} />
             {currentUser ? (
               <>
-                <span>{currentUser.email}</span>
+                <Typography sx={{ marginRight: "10px" }}>
+                  <span>{currentUser.email}</span>
+                </Typography>
+
                 <Button variant="contained" onClick={handleLogOut}>
-                  {" "}
-                  Log Out{" "}
+                  Log Out
                 </Button>
               </>
             ) : (
