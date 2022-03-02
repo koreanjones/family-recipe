@@ -19,14 +19,13 @@ const RecipeList = (props) => {
           justifyContent: "center",
         }}
         marginBottom={"2%"}
-      >
+      >{console.log(props)}
         {props.currentUser &&
           privateRecipes.map((recipe) => (
             <Grid key={Math.random()} item md={2.5}>
               <Recipe
+                props={props}
                 recipe={recipe}
-                deleteCard={props.deleteCard}
-                updateRecipeCard={props.updateRecipeCard}
               />
             </Grid>
           ))}

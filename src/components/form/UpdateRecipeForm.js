@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox, makeStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { updateRecipeData } from "../../api/RecipeApi";
+import { updateRecipeData, getRecipe } from "../../api/RecipeApi";
 import { Modal, Box, Typography, FormControlLabel } from "@mui/material";
 
 const style = {
@@ -35,29 +35,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateRecipeForm = ({ props }) => {
+const UpdateRecipeForm = (props) => {
+  console.log(props.recipe);
   const classes = useStyles();
-  // create state variables for each input
-  const [recipeTitle, setRecipeTitle] = useState(props.recipe.name);
+
+  const [recipeTitle, setRecipeTitle] = useState(props.props.recipe.name);
   const [recipeDescription, setRecipeDescription] = useState(
-    props.recipe.description
+    'props.recipe.description'
   );
-  const [cookingTime, setCookingTime] = useState(props.recipe.cookingTime);
-  const [prepTime, setPrepTime] = useState(props.recipe.prepTime);
+  const [cookingTime, setCookingTime] = useState(
+    'props.recipe.cookingTime'
+  );
+  const [prepTime, setPrepTime] = useState('props.recipe.prepTime');
   const [cookingInstructions, setCookingInstructions] = useState(
-    props.recipe.cookingInstructions
+    'props.recipe.cookingInstructions'
   );
-  const [image, setImage] = useState(props.recipe.image);
-
+  const [image, setImage] = useState('props.recipe.image');
   const [ingredientName, setIngredientName] = useState("");
-
   const [privateRecipe, setPrivateRecipe] = useState(
-    props.recipe.privateRecipe
+   'props.recipe.privateRecipe'
   );
+
   let recipeId = "";
 
   if (props !== undefined) {
-    recipeId = props.recipe.recipeId;
+    recipeId = 'props.props.recipe.recipeId';
   } else {
     recipeId = "";
   }
@@ -82,7 +84,7 @@ const UpdateRecipeForm = ({ props }) => {
       image,
       privateRecipe
     );
-    props.handleClose();
+    props.props.handleClose();
     clearForm();
   };
   const clearForm = () => {
@@ -98,13 +100,13 @@ const UpdateRecipeForm = ({ props }) => {
 
   const cancelButton = () => {
     clearForm();
-    props.handleClose();
+    props.props.handleClose();
   };
 
   return (
     <>
       <Modal
-        open={props.updateRecipeOpen}
+        open={false}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -151,16 +153,15 @@ const UpdateRecipeForm = ({ props }) => {
               value={cookingInstructions}
               onChange={(e) => setCookingInstructions(e.target.value)}
             />
-            {props.recipe.ingredients !== undefined && (
-              <TextField
-                label="Ingredients"
-                variant="filled"
-                type="text"
-                required
-                value={ingredientName}
-                onChange={(e) => setIngredientName(e.target.value)}
-              />
-            )}
+
+            <TextField
+              label="Ingredients"
+              variant="filled"
+              type="text"
+              required
+              value={ingredientName}
+              onChange={(e) => setIngredientName(e.target.value)}
+            />
 
             <TextField
               label="Image Url"
@@ -173,7 +174,7 @@ const UpdateRecipeForm = ({ props }) => {
             <Typography>Check box below to make private.</Typography>
             <FormControlLabel
               control={
-                props.recipe.privateRecipe === false ? (
+                props.props.recipe.privateRecipe === false ? (
                   <Checkbox />
                 ) : (
                   <Checkbox defaultChecked />

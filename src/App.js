@@ -48,15 +48,23 @@ const App = () => {
     await deleteDoc(doc(db, "recipes", id));
     console.log(recipeList);
   };
-  const handleUpdateRecipeOpen = () => {
-    setUpdateRecipeOpen(true);
-  };
+  
 
   const updateRecipeCard = async (id) => {
-    setRecipe(await getSingleRecipe(id));
+    const singleRecipe = await getSingleRecipe(id)
+    setRecipe(singleRecipe);
+    
     // const recipe = await getSingleRecipe(id)
     //   .then(setRecipe(recipe))
-    handleUpdateRecipeOpen();
+    if (recipe === '') {
+      console.log("notWoring")
+    } else {
+      handleUpdateRecipeOpen();
+    }
+  
+  };
+  const handleUpdateRecipeOpen = () => {
+    setUpdateRecipeOpen(true);
   };
 
   const getSingleRecipe = async (id) => {
@@ -119,6 +127,8 @@ const App = () => {
               />
             }
           />
+          console.log(recipe)
+          {recipe === "" ? console.log("working") : console.log("not working")}
           <Route path="/userPage" element={<PrivateRoute />}>
             <Route
               path="/userPage"
